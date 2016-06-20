@@ -1,0 +1,6 @@
+<?php if (!defined('THINK_PATH')) exit();?><form action="" method="post">
+
+    角色ID:<input name="role_id" type="text" value="">
+    规则ID:<input name="rule_id" type="text" value="">
+    <button type="submit">提交</button>
+</form>

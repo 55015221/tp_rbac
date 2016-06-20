@@ -1,0 +1,7 @@
+<ul>
+    <volist name="data" id="vo">
+        <li>
+            <a href="{:U($vo['path'],true,false,true)}">{:U($vo['path'],true,false,true)}</a>{$vo['allow']?'(true)':''}
+        </li>
+    </volist>
+</ul>

@@ -1,0 +1,5 @@
+<?php if (!defined('THINK_PATH')) exit();?><form action="" method="post">
+
+    角色名称：<input name="role_name" type="text" value="">
+    <button type="submit">提交</button>
+</form>
