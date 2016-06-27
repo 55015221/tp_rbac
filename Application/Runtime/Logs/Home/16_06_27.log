@@ -1,0 +1,14 @@
+[ 2016-06-27T15:01:04+08:00 ] 10.1.0.1 /Home/Public/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000774s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001564s ]
+SQL: SHOW COLUMNS FROM `mt_user` [ RunTime:0.0003s ]
+SQL: SELECT * FROM `mt_user` WHERE `username` = 'admin' AND `password` = '123456' LIMIT 1   [ RunTime:0.0001s ]
+
+[ 2016-06-27T15:02:05+08:00 ] 10.1.0.1 /Home/Public/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000736s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001072s ]
+SQL: SHOW COLUMNS FROM `mt_user` [ RunTime:0.0004s ]
+SQL: SELECT * FROM `mt_user` WHERE `username` = 'admin' AND `password` = '123456' LIMIT 1   [ RunTime:0.0001s ]
+

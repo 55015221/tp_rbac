@@ -106,7 +106,7 @@
         <!-- sidebar -->
         <script type="text/javascript">
             document.oncontextmenu = function () {
-                return false
+                //return false
             }
         </script>
         <div id="sidebar" product-id="account" class="sidebar-content">
@@ -115,6 +115,7 @@
                 <!-- ngIf: versionGreaterThan1_3_21 -->
                 <div id='sidebar-icon' class="sidebar-fold ng-scope icon-unfold"></div>
                 <!-- end ngIf: versionGreaterThan1_3_21 -->
+                <!--
                 <div class="sidebar-nav main-nav">
                     <div class="sidebar-title">
                         <div class="sidebar-title-inner ng-scope"><span
@@ -124,25 +125,27 @@
                         </div>
                     </div>
                     <ul class="sidebar-trans" style="height:auto;">
-                        <!-- ngRepeat: item in productList track by $index -->
+                        &lt;!&ndash; ngRepeat: item in productList track by $index &ndash;&gt;
                         <li class="nav-item ng-scope">
                             <a href="/index.php?s=/Index/home.html" class="sidebar-trans ng-scope">
                                 <div class="nav-icon sidebar-trans"><span class="icon-wo-sitebuild"></span></div>
                                 <span class="nav-title ng-binding">首页&nbsp;</span>
                             </a>
                         </li>
-                        <!-- end ngRepeat: item in productList track by $index -->
-                        <!-- ngRepeat: item in productList track by $index -->
-                        <!-- <li class="nav-item ng-scope">
+                        &lt;!&ndash; end ngRepeat: item in productList track by $index &ndash;&gt;
+                        &lt;!&ndash; ngRepeat: item in productList track by $index &ndash;&gt;
+                        &lt;!&ndash; <li class="nav-item ng-scope">
                             <a href="/index.php?s=/Access/roleList.html" class="sidebar-trans ng-scope">
                                 <div class="nav-icon sidebar-trans"><span class="icon-rds"></span></div><span class="nav-title ng-binding">角色管理&nbsp;</span>
                             </a>
-                        </li> -->
-                        <!-- end ngRepeat: item in productList track by $index -->
+                        </li> &ndash;&gt;
+                        &lt;!&ndash; end ngRepeat: item in productList track by $index &ndash;&gt;
                     </ul>
                 </div>
+                -->
                 <div class="sidebar-nav">
-                    <div class="sidebar-title">
+              <!--
+              <div class="sidebar-title">
                         <div class="sidebar-title-inner ng-scope"><span class="sidebar-title-icon"><span
                                 class="icon-arrow-down"></span></span><span
                                 class="sidebar-title-text ng-binding">用户中心</span>
@@ -151,6 +154,7 @@
 						</span>
                         </div>
                     </div>
+                    -->
                     <ul class="entrance-nav sidebar-trans" id="nav" style="height:auto;">
                         <!-- <li class="nav-item ng-scope active">
                             <a href="#" class="ng-scope">
@@ -224,11 +228,23 @@
     <div class="viewFramework-product-body" id="mainFrameBody">
         <!-- product body -->
         
-    <ul>
-        <?php if(is_array($data)): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li>
-                <a href="<?php echo U($vo['path'],true,false,true);?>"><?php echo U($vo['path'],true,false,true);?></a><?php echo ($vo['allow']?'(true)':''); ?>
-            </li><?php endforeach; endif; else: echo "" ;endif; ?>
-    </ul>
+    <div class="">
+        <a class="btn btn-small btn-success pull-right" href="<?php echo U('Auth/createrole');?>">新增角色</a>
+    </div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>角色ID</th>
+            <th>角色名称</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php if(is_array($data)): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+                <td><?php echo ($vo["role_id"]); ?></td>
+                <td><?php echo ($vo["role_name"]); ?></td>
+            </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+        </tbody>
+    </table>
 
         <!-- /product body -->
     </div>

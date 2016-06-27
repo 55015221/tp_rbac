@@ -4,11 +4,11 @@ namespace Home\Controller;
 use Home\Common\Authorize;
 use Home\Common\BaseController;
 
-class IndexController extends BaseController
+class AuthController extends BaseController
 {
     public function index()
     {
-        $this->display();
+
     }
 
 
@@ -28,8 +28,10 @@ class IndexController extends BaseController
 
     public function ruleList()
     {
-        dump(M('rule')->select());
-        exit;
+        $data = M('rule')->select();
+
+        $this->assign('data', $data);
+        $this->display();
     }
 
     public function createRole()
@@ -47,8 +49,9 @@ class IndexController extends BaseController
 
     public function roleList()
     {
-        dump(M('role')->select());
-        exit;
+        $data = M('role')->select();
+        $this->assign('data', $data);
+        $this->display();
     }
 
     public function roleRule()

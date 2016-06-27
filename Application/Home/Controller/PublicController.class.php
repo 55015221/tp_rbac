@@ -8,21 +8,24 @@ class PublicController extends BaseController
 {
     public function login()
     {
-        $map = [
-            'username' => I('username'),
-            'password' => I('password'),
-        ];
-        if ($uid = Authorize::identify($map)) {
-            session('uid', $uid);
-            $this->redirect(U('Index/index'));
+        if (IS_AJAX) {
+            $map = [
+                'username' => I('username'),
+                'password' => I('password'),
+            ];
+            if ($data = Authorize::identify($map)) {
+                Authorize::login($data);
+                $this->success('登录成功！', U('Index/index'));
+            }
+            $this->error('用户名或密码错误！');
         }
+
         $this->display();
     }
 
     public function logout()
     {
-        if (null == session('uid', null)) {
-            $this->redirect(U('Public/login'));
-        }
+        Authorize::logout();
+        $this->redirect(U('Public/login'));
     }
 }

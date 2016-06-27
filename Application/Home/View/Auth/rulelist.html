@@ -1,0 +1,22 @@
+<extend name="Public:base"/>
+
+<block name="body">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>节点ID</th>
+            <th>节点名称</th>
+            <th>节点路径</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="data" id="vo">
+            <tr>
+                <td>{$vo.rule_id}</td>
+                <td>{$vo.rule_name}</td>
+                <td>{$vo.rule_path}</td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+</block>

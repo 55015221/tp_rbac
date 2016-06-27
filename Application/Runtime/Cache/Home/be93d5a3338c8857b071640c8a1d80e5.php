@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="en">
 <head>
     <title>权限系统</title>
@@ -7,22 +7,22 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- intoHead  -->
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/console1412.css"/>
+    <link rel="stylesheet" type="text/css" href="/Public/Css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/Public/Css/console1412.css"/>
     <!-- 全局公共样式 -->
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/global.css"/>
+    <link rel="stylesheet" type="text/css" href="/Public/Css/global.css"/>
     <!-- jQuery2.0库 -->
-    <!-- <script type="text/javascript" src="__PUBLIC__/Js/jquery-2.1.1.min.js"></script> -->
-    <script type="text/javascript" src="__PUBLIC__/Js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Js/jquery.form.js"></script>
+    <!-- <script type="text/javascript" src="/Public/Js/jquery-2.1.1.min.js"></script> -->
+    <script type="text/javascript" src="/Public/Js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/Public/Js/jquery.form.js"></script>
     <!-- LayerUi库 -->
-    <script type="text/javascript" src="__PUBLIC__/Resources/LayerUI/layer.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Resources/LayerUI/laypage/laypage.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Js/jquery.confirm.js"></script>
+    <script type="text/javascript" src="/Public/Resources/LayerUI/layer.js"></script>
+    <script type="text/javascript" src="/Public/Resources/LayerUI/laypage/laypage.js"></script>
+    <script type="text/javascript" src="/Public/Js/jquery.confirm.js"></script>
     <!-- 后台JS -->
-    <script type="text/javascript" src="__PUBLIC__/Js/index.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Js/layerUi.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Js/global.js"></script>
+    <script type="text/javascript" src="/Public/Js/index.js"></script>
+    <script type="text/javascript" src="/Public/Js/layerUi.js"></script>
+    <script type="text/javascript" src="/Public/Js/global.js"></script>
     <script type="text/javascript">
         document.oncontextmenu = function () {
             return false
@@ -43,10 +43,10 @@
     <div class="aliyun-console-topbar ng-isolate-scope">
         <div class="topbar-wrap topbar-clearfix">
             <div class="topbar-head topbar-left">
-                <a href="{:U('Index/index')}" target="_blank" class="topbar-logo topbar-left">
+                <a href="<?php echo U('Index/index');?>" target="_blank" class="topbar-logo topbar-left">
                     <span class="icon-logo1"></span>
                 </a>
-                <a href="{:U('Index/index')}" target="_self" class="topbar-home-link topbar-btn topbar-left">
+                <a href="<?php echo U('Index/index');?>" target="_self" class="topbar-home-link topbar-btn topbar-left">
                     <span class="ng-binding">管理控制台</span>
                 </a>
             </div>
@@ -69,13 +69,13 @@
                 <div class="topbar-left ng-scope">
                     <div id='loginOut' class="dropdown topbar-info-item">
                         <a href="javascript:;" class="dropdown-toggle topbar-btn">
-                            <span class="ng-binding">{$__USER__.username}</span>
+                            <span class="ng-binding"><?php echo ($__USER__["username"]); ?></span>
                             <span class="icon-arrow-down"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- ngRepeat: link in navLinks.user.links -->
                             <li class="topbar-info-btn ng-scope">
-                                <a href="{:U('Public/logout')}" target="_self"><span
+                                <a href="<?php echo U('Public/logout');?>" target="_self"><span
                                         class="ng-binding">退出</span></a>
                             </li>
                             <!-- end ngRepeat: link in navLinks.user.links -->
@@ -145,15 +145,13 @@
                                 <div class="nav-icon"><span class="icon-account-2"></span></div><span class="nav-title ng-binding">全局</span>
                             </a>
                         </li> -->
-                        <volist name="nav" id="vo">
-                            <li class="nav-item ng-scope">
-                                <a href="javascript:;" data-submenu="{$vo.id}" data-count="5" data-url="{$vo.url}"
+                        <?php if(is_array($nav)): $i = 0; $__LIST__ = $nav;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li class="nav-item ng-scope">
+                                <a href="javascript:;" data-submenu="<?php echo ($vo["id"]); ?>" data-count="5" data-url="<?php echo ($vo["url"]); ?>"
                                    class="ng-scope">
-                                    <div class="nav-icon"><span class="{$vo.class}"></span></div>
-                                    <span class="nav-title ng-binding">{$vo.label}</span>
+                                    <div class="nav-icon"><span class="<?php echo ($vo["class"]); ?>"></span></div>
+                                    <span class="nav-title ng-binding"><?php echo ($vo["label"]); ?></span>
                                 </a>
-                            </li>
-                        </volist>
+                            </li><?php endforeach; endif; else: echo "" ;endif; ?>
                     </ul>
                 </div>
             </div>
@@ -161,7 +159,76 @@
         <!-- /sidebar -->
     </div>
 
-    <include file="Public/sidebar"/>
+    <div id='sidebal-middle' class="viewFramework-product">
+    <!-- <div class="viewFramework-product-navbar-bg"></div> -->
+    <!-- ngIf: config.productNavBar != 'disabled' -->
+    <div class="viewFramework-product-navbar ng-scope hidden">
+        <!-- product nav -->
+        <div class="product-nav-stage ng-scope product-nav-stage-main">
+            <div class="product-nav-scene product-nav-main-scene">
+                <div class="product-nav-title ng-binding">账号管理</div>
+                <!-- 自定义内容插入点，比如商标、logo -->
+                <div customized-content="" class="ng-isolate-scope"></div>
+                <div class="product-nav-list" id="product-nav-list">
+                    <?php if(is_array($subnav)): $i = 0; $__LIST__ = $subnav;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vol): $mod = ($i % 2 );++$i;?><ul class="submenu-<?php echo ($key); ?> hidden" data-submenu="<?php echo ($key); ?>">
+                            <?php if(is_array($subnav[$key])): $i = 0; $__LIST__ = $subnav[$key];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li>
+                                    <div class="ng-isolate-scope">
+                                        <a href="<?php echo ($vo["url"]); ?>" data-url="<?php echo ($vo["url"]); ?>" class="ng-scope">
+                                            <div class="nav-icon"></div>
+                                            <div class="nav-title ng-binding"><?php echo ($vo["label"]); ?></div>
+                                        </a>
+                                    </div>
+                                </li><?php endforeach; endif; else: echo "" ;endif; ?>
+                        </ul><?php endforeach; endif; else: echo "" ;endif; ?>
+                </div>
+            </div>
+            <div class="product-nav-scene product-nav-sub-scene">
+                <div class="product-nav-title">
+                    <!-- ngIf: config.backNav -->
+                </div>
+                <div class="product-nav-list">
+                    <ul>
+                        <!-- ngRepeat: item in config.subNav -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /product nav -->
+    </div>
+    <!-- end ngIf: config.productNavBar != 'disabled' -->
+    <!-- product nav collapse-->
+    <!-- ngIf: config.productNavBar != 'disabled' -->
+    <div class="viewFramework-product-navbar-collapse ng-scope hidden">
+        <div class="product-navbar-collapse-inner">
+            <div class="product-navbar-collapse-bg"></div>
+            <div id='icon-left' class="product-navbar-collapse">
+                <span class="icon-collapse-left"></span>
+                <span class="icon-collapse-right"></span>
+            </div>
+        </div>
+    </div>
+    <!-- end ngIf: config.productNavBar != 'disabled' -->
+    <!-- /product nav collapse-->
+    <div class="viewFramework-product-body" id="mainFrameBody">
+        <!-- product body -->
+            
+    <form class="form-horizontal" action="" method="post">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="">角色名称:</label>
+            <div class="col-sm-10">
+                <input name="role_name" class="form-control" type="text" value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">提交</button>
+            </div>
+        </div>
+    </form>
+
+        <!-- /product body -->
+    </div>
+</div>
 </div>
 </body>
 </html>

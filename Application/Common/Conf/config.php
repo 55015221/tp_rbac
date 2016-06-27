@@ -3,8 +3,9 @@ return array(
     //'配置项'=>'配置值'
 
     'APP_DEBUG' => true,
-    'URL_MODEL' => 0,
+    'URL_MODEL' => 2,
     'URL_CASE_INSENSITIVE' => true,
+    'URL_HTML_SUFFIX' => '',
 
     /* 数据库设置 */
     'DB_TYPE' => 'mysql',        // 数据库类型

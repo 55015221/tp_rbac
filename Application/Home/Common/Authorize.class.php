@@ -10,8 +10,22 @@ class Authorize
 
     public static function getUserInfo()
     {
-        $uid = session('uid');
-        return M('user')->find($uid);
+        return session('__USER__');
+    }
+
+    public static function logout()
+    {
+        session('__USER__', null);
+    }
+
+    public static function login($data)
+    {
+        $user = [
+            'user_id' => $data['user_id'],
+            'username' => $data['username'],
+            'group_id' => $data['group_id'],
+        ];
+        session('__USER__', $user);
     }
 
     //认证
@@ -19,7 +33,7 @@ class Authorize
     {
         $data = M('user')->where($map)->find();
         if (!empty($data)) {
-            return $data['user_id'];
+            return $data;
         }
         return false;
     }
@@ -34,7 +48,8 @@ class Authorize
 
     public static function accessList()
     {
-        $uid = session('uid');
+        $user = Authorize::getUserInfo();
+        $uid = $user['user_id'];
         $sql = "SELECT DISTINCT role.role_id,role.role_name,rule.rule_name,rule.rule_path
             FROM mt_user_role AS user_role
             LEFT JOIN mt_role_rule AS role_rule ON role_rule.role_id = user_role.role_id
@@ -84,6 +99,19 @@ class Authorize
             'role' => $role,
             'rule' => $rule,
         ];
+        return $data;
+    }
+
+
+    public static function getSidebar()
+    {
+        $data = include(APP_PATH . '/Home/Conf/nav.php');
+        return $data;
+    }
+
+    public static function getSubnav()
+    {
+        $data = include(APP_PATH . '/Home/Conf/subnav.php');
         return $data;
     }
 
