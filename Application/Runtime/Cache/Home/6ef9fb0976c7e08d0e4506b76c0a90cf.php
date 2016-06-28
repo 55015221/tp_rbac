@@ -57,17 +57,9 @@
                             class="icon-arrow-down"></span></a>
                         <ul class="dropdown-menu">
                             <!-- ngRepeat: link in navLinks.help.links -->
-                            <li class="topbar-info-btn ng-scope"><a href="#" target="_blank"><span class="ng-binding">等待添加</span><!-- ngIf: link.showNew -->
-                            </a></li>
-                            <!-- end ngRepeat: link in navLinks.help.links -->
-                            <li class="topbar-info-btn ng-scope"><a href="#" target="_blank"><span class="ng-binding">等待添加</span><!-- ngIf: link.showNew -->
-                            </a></li>
-                            <!-- end ngRepeat: link in navLinks.help.links -->
-                            <li class="topbar-info-btn ng-scope"><a href="#" target="_blank"><span class="ng-binding">等待添加</span><!-- ngIf: link.showNew -->
-                            </a></li>
-                            <!-- end ngRepeat: link in navLinks.help.links -->
-                            <li class="topbar-info-btn ng-scope"><a href="#" target="_blank"><span class="ng-binding">等待添加</span><!-- ngIf: link.showNew -->
-                            </a></li>
+                            <li class="topbar-info-btn ng-scope">
+                                <a href="#" target="_blank"><span class="ng-binding">等待添加</span><!-- ngIf: link.showNew --></a>
+                            </li>
                             <!-- end ngRepeat: link in navLinks.help.links -->
                         </ul>
                     </div>
@@ -91,10 +83,7 @@
                     </div>
                 </div>
                 <!-- end ngIf: navLinks.user.show -->
-                <!-- 国际化 -->
-                <!-- ngIf: navLinks.i18n.show && navLinks.i18n.currentLanguage -->
             </div>
-            <!-- ngIf: navLinks.assist.show && helpConfig -->
         </div>
     </div>
     <!-- /topbar -->
@@ -104,11 +93,6 @@
 <div id='sidebar-left' class="viewFramework-body viewFramework-sidebar-full">
     <div class="viewFramework-sidebar">
         <!-- sidebar -->
-        <script type="text/javascript">
-            document.oncontextmenu = function () {
-                //return false
-            }
-        </script>
         <div id="sidebar" product-id="account" class="sidebar-content">
             <!-- ngIf: !loadingState -->
             <div class="sidebar-inner ng-scope">
@@ -144,17 +128,17 @@
                 </div>
                 -->
                 <div class="sidebar-nav">
-              <!--
-              <div class="sidebar-title">
-                        <div class="sidebar-title-inner ng-scope"><span class="sidebar-title-icon"><span
-                                class="icon-arrow-down"></span></span><span
-                                class="sidebar-title-text ng-binding">用户中心</span>
-					<span class="sidebar-manage ng-scope">
-						<a class="icon-setup ng-isolate-scope" title="自定义用户中心快捷入口"></a>
-						</span>
-                        </div>
-                    </div>
-                    -->
+                    <!--
+                    <div class="sidebar-title">
+                              <div class="sidebar-title-inner ng-scope"><span class="sidebar-title-icon"><span
+                                      class="icon-arrow-down"></span></span><span
+                                      class="sidebar-title-text ng-binding">用户中心</span>
+                          <span class="sidebar-manage ng-scope">
+                              <a class="icon-setup ng-isolate-scope" title="自定义用户中心快捷入口"></a>
+                              </span>
+                              </div>
+                          </div>
+                          -->
                     <ul class="entrance-nav sidebar-trans" id="nav" style="height:auto;">
                         <!-- <li class="nav-item ng-scope active">
                             <a href="#" class="ng-scope">
@@ -227,7 +211,10 @@
     <!-- /product nav collapse-->
     <div class="viewFramework-product-body" id="mainFrameBody">
         <!-- product body -->
-        
+            
+    <div class="">
+        <a class="btn btn-small btn-success pull-right" href="<?php echo U('Auth/createrule');?>">新增节点</a>
+    </div>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -249,9 +236,5 @@
     </div>
 </div>
 </div>
-<!-- <div class="aliyun-console-sidebar-tooltip right fade in" title="" content="云服务器ECS&nbsp;" style="top: 120px; left: 50px; display: block;">
-    <div class="tooltip-arrow"></div>
-    <div class="tooltip-inner ng-binding">云服务器ECS&nbsp;</div>
-</div> -->
 </body>
 </html>

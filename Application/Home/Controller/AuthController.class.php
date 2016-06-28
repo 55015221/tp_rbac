@@ -20,7 +20,7 @@ class AuthController extends BaseController
                 'rule_name' => trim(I('rule_name')),
             ];
             if (M('rule')->add($data)) {
-                $this->redirect(U('Index/rulelist'));
+                $this->redirect(U('Auth/rulelist'));
             }
         }
         $this->display();
@@ -41,7 +41,7 @@ class AuthController extends BaseController
                 'role_name' => trim(I('role_name')),
             ];
             if (M('role')->add($data)) {
-                $this->redirect(U('Index/rolelist'));
+                $this->redirect(U('Auth/rolelist'));
             }
         }
         $this->display();
@@ -56,35 +56,72 @@ class AuthController extends BaseController
 
     public function roleRule()
     {
-        if (IS_POST) {
-            $data = [
-                'role_id' => I('role_id'),
-                'rule_id' => I('rule_id'),
-            ];
-            if (M('role_rule')->add($data)) {
-                dump(M('role_rule')->select());
-                exit;
+        $role_id = I('role_id');
+
+        $rules = M('rule')->select();
+        $roleRule = M('role_rule')->where(['role_id' => $role_id])->select();
+        $roleRule = array_map(function ($val) {
+            return $val['rule_id'];
+        }, $roleRule);
+
+        foreach ($rules as &$value) {
+            $value['active'] = false;
+            if (in_array($value['rule_id'], $roleRule)) {
+                $value['active'] = true;
             }
         }
-        dump(M('role')->select());
-        dump(M('rule')->select());
+
+        if (IS_POST) {
+            $ids = I('ids');
+
+            $assoc_add = array_diff($ids, $roleRule);
+            $assoc_del = array_diff($roleRule, $ids);
+
+            foreach ($assoc_add as $rule_id) {
+                $addData = [
+                    'role_id' => $role_id,
+                    'rule_id' => $rule_id,
+                ];
+                M('role_rule')->add($addData);
+            }
+
+            foreach ($assoc_del as $rule_id) {
+                $delData = [
+                    'role_id' => $role_id,
+                    'rule_id' => $rule_id,
+                ];
+                M('role_rule')->where($delData)->delete();
+            }
+
+            $this->success('ok');
+        }
+
+        $this->assign('role_id', $role_id);
+        $this->assign('rules', $rules);
         $this->display();
     }
 
     public function userRole()
     {
+        $user_id = I('user_id');
+
         if (IS_POST) {
-            $data = [
-                'user_id' => I('user_id'),
-                'role_id' => I('role_id'),
-            ];
-            if (M('user_role')->add($data)) {
-                dump(M('user_role')->select());
-                exit;
+            $role_id = I('role_id');
+            M('user_role')->where(['user_id' => $user_id])->setField('role_id', $role_id);
+            $this->success('ok');
+        }
+        $roleId = M('user_role')->where(['user_id' => $user_id])->getField('role_id');
+        $roles = M('role')->select();
+
+        foreach ($roles as &$value) {
+            $value['active'] = false;
+            if ($value['role_id'] == $roleId) {
+                $value['active'] = true;
             }
         }
-        dump(M('user')->select());
-        dump(M('role')->select());
+
+        $this->assign('user_id', $user_id);
+        $this->assign('roles', $roles);
         $this->display();
     }
 

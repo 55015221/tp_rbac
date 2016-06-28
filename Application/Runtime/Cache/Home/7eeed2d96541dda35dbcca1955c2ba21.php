@@ -212,25 +212,32 @@
     <div class="viewFramework-product-body" id="mainFrameBody">
         <!-- product body -->
             
-    <div class="">
-        <a class="btn btn-small btn-success pull-right" href="<?php echo U('Auth/createrole');?>">新增角色</a>
-    </div>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>角色ID</th>
-            <th>角色名称</th>
-            <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php if(is_array($data)): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
-                <td><?php echo ($vo["role_id"]); ?></td>
-                <td><?php echo ($vo["role_name"]); ?></td>
-                <td><a href="<?php echo U('Auth/roleRule',['role_id'=>$vo['role_id']]);?>">编辑权限</a></td>
-            </tr><?php endforeach; endif; else: echo "" ;endif; ?>
-        </tbody>
-    </table>
+    <form class="form-horizontal" action="" method="post">
+        <input type="hidden" name="user_id" value="<?php echo ($user_id); ?>">
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>选择</th>
+                <th>角色ID</th>
+                <th>角色名称</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php if(is_array($roles)): $i = 0; $__LIST__ = $roles;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+                    <td><input name="role_id" type="radio" <?= $vo['active']?'checked':''?> value="<?php echo ($vo["role_id"]); ?>"></td>
+                    <td><?php echo ($vo["role_id"]); ?></td>
+                    <td><?php echo ($vo["role_name"]); ?></td>
+                </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+            </tbody>
+        </table>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">提交</button>
+            </div>
+        </div>
+    </form>
 
         <!-- /product body -->
     </div>

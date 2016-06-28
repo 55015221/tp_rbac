@@ -7,17 +7,19 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>角色ID</th>
-            <th>角色名称</th>
+            <th>用户ID</th>
+            <th>用户名</th>
+            <th>角色名</th>
             <th>操作</th>
         </tr>
         </thead>
         <tbody>
         <volist name="data" id="vo">
             <tr>
-                <td>{$vo.role_id}</td>
+                <td>{$vo.user_id}</td>
+                <td>{$vo.username}</td>
                 <td>{$vo.role_name}</td>
-                <td><a href="{:U('Auth/roleRule',['role_id'=>$vo['role_id']])}">编辑权限</a></td>
+                <td><a href="{:U('Auth/userrole',['user_id'=>$vo['user_id']])}">设置角色</a></td>
             </tr>
         </volist>
         </tbody>

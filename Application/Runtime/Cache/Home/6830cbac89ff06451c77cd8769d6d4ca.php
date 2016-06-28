@@ -218,16 +218,18 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>角色ID</th>
-            <th>角色名称</th>
+            <th>用户ID</th>
+            <th>用户名</th>
+            <th>角色名</th>
             <th>操作</th>
         </tr>
         </thead>
         <tbody>
         <?php if(is_array($data)): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
-                <td><?php echo ($vo["role_id"]); ?></td>
+                <td><?php echo ($vo["user_id"]); ?></td>
+                <td><?php echo ($vo["username"]); ?></td>
                 <td><?php echo ($vo["role_name"]); ?></td>
-                <td><a href="<?php echo U('Auth/roleRule',['role_id'=>$vo['role_id']]);?>">编辑权限</a></td>
+                <td><a href="<?php echo U('Auth/userrole',['user_id'=>$vo['user_id']]);?>">设置角色</a></td>
             </tr><?php endforeach; endif; else: echo "" ;endif; ?>
         </tbody>
     </table>

@@ -12,3 +12,38 @@ INFO: [ app_begin ] --END-- [ RunTime:0.001072s ]
 SQL: SHOW COLUMNS FROM `mt_user` [ RunTime:0.0004s ]
 SQL: SELECT * FROM `mt_user` WHERE `username` = 'admin' AND `password` = '123456' LIMIT 1   [ RunTime:0.0001s ]
 
+[ 2016-06-27T18:53:12+08:00 ] 10.1.0.1 /Home/Public/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000722s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001287s ]
+SQL: SHOW COLUMNS FROM `mt_user` [ RunTime:0.0003s ]
+SQL: SELECT * FROM `mt_user` WHERE `username` = 'admin' AND `password` = '123456' LIMIT 1   [ RunTime:0.0001s ]
+
+[ 2016-06-27T18:55:41+08:00 ] 10.1.0.1 /Home/Public/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000493s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000830s ]
+SQL: SHOW COLUMNS FROM `mt_user` [ RunTime:0.0003s ]
+SQL: SELECT * FROM `mt_user` WHERE `username` = 'admin' AND `password` = '123456' LIMIT 1   [ RunTime:0.0001s ]
+
+[ 2016-06-27T19:50:14+08:00 ] 10.1.0.1 /Home/User/index
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.user_id = user_role.user_id JOIN user_role role.role_id = user_role.role_id JOI' at line 1
+ [ SQL语句 ] : SELECT * FROM `mt_user` user.user_id = user_role.user_id JOIN user_role role.role_id = user_role.role_id JOIN role  
+
+[ 2016-06-27T19:50:25+08:00 ] 10.1.0.1 /Home/User/index
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.user_id = user_role.user_id JOIN user_role role.role_id = user_role.role_id JOI' at line 1
+ [ SQL语句 ] : SELECT * FROM `mt_user` user.user_id = user_role.user_id JOIN user_role role.role_id = user_role.role_id JOIN role  
+
+[ 2016-06-27T19:50:54+08:00 ] 10.1.0.1 /Home/User/index
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ON user.user_id = user_role.user_id JOIN user_role ON role.role_id = user_role.r' at line 1
+ [ SQL语句 ] : SELECT * FROM `mt_user` ON user.user_id = user_role.user_id JOIN user_role ON role.role_id = user_role.role_id JOIN role  
+
+[ 2016-06-27T19:52:21+08:00 ] 10.1.0.1 /Home/User/index
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ON user.user_id = user_role.user_id JOIN mt_user_role AS user_role ON role.role_' at line 1
+ [ SQL语句 ] : SELECT * FROM mt_user AS user ON user.user_id = user_role.user_id JOIN mt_user_role AS user_role ON role.role_id = user_role.role_id JOIN mt_role AS user_role  
+
+[ 2016-06-27T19:54:26+08:00 ] 10.1.0.1 /Home/User/index
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FORM mt_user AS user LEFT JOIN mt_user_role AS user_role ON user.user_id = user_' at line 1
+ [ SQL语句 ] : SELECT * FORM mt_user AS user LEFT JOIN mt_user_role AS user_role ON user.user_id = user_role.user_id
+        LEFT JOIN mt_role AS user_role ON role.role_id = user_role.role_id
+
